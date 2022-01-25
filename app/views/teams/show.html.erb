@@ -43,7 +43,7 @@
                     <tr>
                       <td><%= image_tag 'default.jpg', size: '40x40' %></td>
                       <td><%= assign.user.email %></td>
-                      <%# 削除ボタン押したとき {パラメータ:"team_id"=>"BasicTeam", "id"=>"1"} %>
+                        <%# 削除ボタン押したとき {パラメータ:"team_id"=>"BasicTeam", "id"=>"1"} %>
                       <% if (current_user.id == assign.team.owner.id ) || ( current_user.id == assign.user.id ) %>
                         <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' %></td>
                       <% end %>
