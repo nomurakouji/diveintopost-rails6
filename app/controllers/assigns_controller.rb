@@ -37,7 +37,7 @@ class AssignsController < ApplicationController
       I18n.t('views.messages.cannot_delete_the_leader')
     elsif Assign.where(user_id: assigned_user.id).count == 1
       I18n.t('views.messages.cannot_delete_only_a_member')
-    # current_user
+    # current_userの情報
     # <User id: 9, email: "christoper_flatley@jast-tillman.com", icon: nil, keep_team_id: 1>
     elsif (current_user.id != assign.team.owner.id ) && ( current_user.id != assigned_user.id )
       set_next_team(assign, assigned_user)
