@@ -33,15 +33,19 @@ class AssignsController < ApplicationController
   def assign_destroy(assign, assigned_user)
     # assign.team.owner
     # <User id: 1, email: "elenor@schmitt-stokes.name",icon: nil, keep_team_id: 5>
+    # assigned_user
+    # <User id: 1, email: "elenor@schmitt-stokes.name", icon: nil, keep_team_id: 5>
     if assigned_user == assign.team.owner
       I18n.t('views.messages.cannot_delete_the_leader')
+    # Assign (id: integer, user_id: integer, team_id: integer)
+    # Assign.where(user_id: assigned_user.id)
+    # <Assign:0x00007fe409d44b90,id: 5,user_id: 7,team_id: 2
     elsif Assign.where(user_id: assigned_user.id).count == 1
       I18n.t('views.messages.cannot_delete_only_a_member')
     # current_userの情報
     # <User id: 9, email: "christoper_flatley@jast-tillman.com", icon: nil, keep_team_id: 1>
-    elsif (current_user.id != assign.team.owner.id ) && ( current_user.id != assigned_user.id )
-      set_next_team(assign, assigned_user)
-      I18n.t('views.messages.delete_member')
+    elsif ( current_user.id != assign.team.owner.id ) && ( current_user.id != assigned_user.id )
+      I18n.t('views.messages.cannot_delete_leader_or_yourself')
     elsif assign.destroy
       set_next_team(assign, assigned_user)
       I18n.t('views.messages.delete_member')
