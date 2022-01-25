@@ -44,8 +44,8 @@ class AssignsController < ApplicationController
       I18n.t('views.messages.cannot_delete_only_a_member')
     # current_userの情報
     # <User id: 9, email: "christoper_flatley@jast-tillman.com", icon: nil, keep_team_id: 1>
-    elsif ( current_user.id != assign.team.owner.id ) && ( current_user.id != assigned_user.id )
-      I18n.t('views.messages.cannot_delete_leader_or_yourself')
+    # elsif ( current_user.id != assign.team.owner.id ) && ( current_user.id != assigned_user.id )
+    #   I18n.t('views.messages.cannot_delete_leader_or_yourself')
     elsif assign.destroy
       set_next_team(assign, assigned_user)
       I18n.t('views.messages.delete_member')
