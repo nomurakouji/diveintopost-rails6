@@ -11,12 +11,16 @@
         <h3 style="color: white;"><%= @working_team.name.truncate(15) %></h3>
       </div>
     </div>
-
+    <%# mt-3=>上側のマージン1rem, pb=>下側のパディング, mb=>下側のマージン %>
     <div class="user-panel mt-3 pb-3 mb-3">
       <div class="info">
         <a href="#" class="d-block mb-1"><%= I18n.t('views.messages.create_agenda') %></a>
+        <%# DBに保存しているのでform_with modelと記載 %>
+        <%# model: :agenda => モデルクラスのインスタンス(保存したいテーブルのクラスのインスタンス) %>
+        <%# scope: :post => inputタグのname属性は'post[:title]' %>
         <%= form_with model: :agenda, scope: :post, url: team_agendas_path(@working_team), local: true do |form| %>
           <div class="input-group input-group-sm">
+          <%# placeholder=>入力欄に予め入力されている文字 %>
             <%= text_field_tag :title, '', { class: 'form-control', placeholder: I18n.t('views.messages.input_agenda_title') } %>
             <span class="input-group-append">
               <button type="submit" class="btn btn-info btn-flat"><%= I18n.t('views.button.create') %></button>
@@ -37,6 +41,7 @@
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
+            <%= button_to "削除" %>
             <ul class="nav nav-treeview" style="display: block;">
               <% agenda.articles.each do |article| %>
                 <li class="nav-item">
