@@ -8,8 +8,11 @@ class TeamsController < ApplicationController
 
   def assign_owner
     @team.update(owner_id: params[:owner_id])
+    # #<User id: 6, email: "solomon.prohaska@wolf-dach.com",keep_team_id: 6>
     @user = User.find(@team.owner_id)
     redirect_to team_path, notice: 'オーナー権限が移動しました!'
+    ContactMailer.contact_mail(@user).deliver  ##追記
+    #redirect_to team_path, notice: 'Contact was successfully created.' ##追記
   end
 
   def show
