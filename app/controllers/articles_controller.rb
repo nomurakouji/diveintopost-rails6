@@ -45,8 +45,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @agenda.destroy
     @article.destroy
-    redirect_to dashboard_url
   end
 
   private

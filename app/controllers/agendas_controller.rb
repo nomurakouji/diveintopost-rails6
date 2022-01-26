@@ -21,6 +21,9 @@ class AgendasController < ApplicationController
     end
 
     def destroy
+      @agenda = agenda
+      @agenda.destroy
+      binding.irb
     end
   end
 
