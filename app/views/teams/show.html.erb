@@ -44,8 +44,14 @@
                       <td><%= image_tag 'default.jpg', size: '40x40' %></td>
                       <td><%= assign.user.email %></td>
                       <%# 削除ボタン押したとき {パラメータ:"team_id"=>"BasicTeam", "id"=>"1"} %>
+                      <%# assign.team.owner.id => <User id: 1, email: "elenor@schmitt-stokes.name", keep_team_id: 5> %>
                       <% if (current_user.id == assign.team.owner.id ) || ( current_user.id == assign.user.id ) %>
-                        <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+                        <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team.id), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+                      <% end %>
+                      <%# current_user %> <%# <User id: 3, keep_team_id: 5, email: "joel_beer@lesch-schimmel.name" %>
+                      <%# assign.team.owner <User id: 1, email: "elenor@schmitt-stokes.name",keep_team_id: 5 %>
+                      <% if current_user.id == assign.team.owner.id %>
+                        <td><%= link_to '権限移譲', assign_owner_team_path(owner_id: assign.user_id), method: :post, class: 'btn btn-sm btn-success' %></td>
                       <% end %>
                     </tr>
                   <% end %>

@@ -1,13 +1,26 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: %i[show edit update destroy]
+  before_action :set_team, only: %i[show edit update destroy assign_owner]
 
   def index
     @teams = Team.all
   end
 
+  def assign_owner
+    @team.update(owner_id: params[:owner_id])
+    # #<User id: 6, email: "solomon.prohaska@wolf-dach.com",keep_team_id: 6>
+    @user = User.find(@team.owner_id)
+    redirect_to team_path, notice: 'オーナー権限が移動しました!'
+    ContactMailer.contact_mail(@user).deliver  ##追記
+    #redirect_to team_path, notice: 'Contact was successfully created.' ##追記
+  end
+
   def show
+    # @working_team 
+    # id: 5,name: "regal",owner_id: 1,
     @working_team = @team
+    # change_keep_team(current_user, @team)
+    # true
     change_keep_team(current_user, @team)
   end
 
