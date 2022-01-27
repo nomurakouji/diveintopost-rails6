@@ -1,8 +1,7 @@
 class ContactMailer < ApplicationMailer
-  def contact_mail(user_emails)
+  def contact_mail(emails)
     #個別送付:@user = agenda.user
-    @user = user_emails
-    binding.irb
+    @user = emails
       mail to: @user, subject: "アジェンダと紐づく記事とコメント削除のメール"
     
   end

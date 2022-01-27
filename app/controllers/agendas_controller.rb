@@ -34,11 +34,9 @@ class AgendasController < ApplicationController
       # 配列は変数にもインスタンス変数にも代入可能
       user_emails = User.where(keep_team_id: @keep_team_id).pluck(:email)
       ###
-      user_emails.each do |user_emails|
-        ContactMailer.contact_mail(user_emails).deliver  
-        binding.irb
+      user_emails.each do |emails|
+        ContactMailer.contact_mail(emails).deliver  
       end
-      #配列をつなげるメソッド:correct_user_emails = @user_emails_team.join
     else
       redirect_to dashboard_url, notice: "権限がないため削除できません。"
     end
