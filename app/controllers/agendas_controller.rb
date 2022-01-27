@@ -19,11 +19,13 @@ class AgendasController < ApplicationController
     else
       render :new
     end
+  end
 
-    def destroy
-      @agenda = agenda
+  def destroy
+    @agenda = Agenda.find(params[:id])
+    if current_user.id == @agenda.user.id || current_user.id == @team.owner.id
       @agenda.destroy
-      binding.irb
+      redirect_to dashboard_url, notice: "#{@agenda.title}を削除しました。"
     end
   end
 

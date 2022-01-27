@@ -35,7 +35,7 @@
       <%# 画面上に記載されている全てのagendaの要素を取得 %>
       <%# 一例）Agenda:0x00007fda85856030,id: 11,title: "aaa",description: nil,team_id: 4,user_id: 1 %>
         <% @working_team.agendas.each do |agenda| %>
-        <% binding.irb %>
+   
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="fa fa-circle-o nav-icon"></i>
@@ -44,7 +44,7 @@
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-            <%= link_to I18n.t('views.button.delete'), dashboard_path(agenda),method: :delete, class: 'btn btn-sm btn-danger' %>
+            <%= link_to I18n.t('views.button.delete'), agenda_path(agenda.id), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger' %>
             <ul class="nav nav-treeview" style="display: block;">
               <% agenda.articles.each do |article| %>
                 <li class="nav-item">
