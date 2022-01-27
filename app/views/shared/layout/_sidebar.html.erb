@@ -34,17 +34,17 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <%# 画面上に記載されている全てのagendaの要素を取得 %>
       <%# 一例）Agenda:0x00007fda85856030,id: 11,title: "aaa",description: nil,team_id: 4,user_id: 1 %>
-        <% @working_team.agendas.each do |agenda| %>
-   
+         <% @working_team.agendas.each do |agenda| %>
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link">
+            <span href="#" class="nav-link">
               <i class="fa fa-circle-o nav-icon"></i>
-              <p>
+              <%# <p> %>
                 <%= agenda.title %>
                 <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <%= link_to I18n.t('views.button.delete'), agenda_path(agenda.id), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger' %>
+              <%# </p> %>
+              <%# agenda.id == 11 %>
+              <%= link_to I18n.t('views.button.delete'), agenda_path(agenda.id), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger' %>
+            </span>
             <ul class="nav nav-treeview" style="display: block;">
               <% agenda.articles.each do |article| %>
                 <li class="nav-item">
