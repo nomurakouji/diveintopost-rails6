@@ -11,11 +11,11 @@ class TeamsController < ApplicationController
     # #<User id: 6, email: "solomon.prohaska@wolf-dach.com",keep_team_id: 6>
     @user = User.find(@team.owner_id)
     redirect_to team_path, notice: 'オーナー権限が移動しました!'
-    #ContactMailer.contact_mail(@user).deliver  
+    # ContactMailer.contact_mail(@user).deliver
   end
 
   def show
-    # @working_team 
+    # @working_team
     # id: 5,name: "regal",owner_id: 1,
     @working_team = @team
     # change_keep_team(current_user, @team)
